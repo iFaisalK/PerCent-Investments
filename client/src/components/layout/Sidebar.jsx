@@ -1,6 +1,6 @@
 import React from 'react';
-import { LayoutDashboard, BarChart2, Users, Settings, LifeBuoy, Download } from 'lucide-react';
-import logo from '../../assets/logo.png'; 
+import { LayoutDashboard, BarChart2, Users, Settings, LifeBuoy, Download } from 'lucide-react'; 
+import logo from "../../assets/Logo.png"
 
 const Sidebar = ({ currentPage, setCurrentPage }) => {
     const menuItems = [
