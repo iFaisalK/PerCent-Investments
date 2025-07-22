@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { LayoutDashboard, BarChart2, Users, Settings, LifeBuoy, Download } from 'lucide-react';
+import logo from '../../assets/logo.png'; 
 
-const Sidebar = () => {
-    const [active, setActive] = useState('Dashboard');
-    
+const Sidebar = ({ currentPage, setCurrentPage }) => {
     const menuItems = [
         { name: 'Dashboard', icon: LayoutDashboard },
         { name: 'Analytics', icon: BarChart2 },
@@ -16,27 +15,27 @@ const Sidebar = () => {
     ];
 
     return (
-        <aside className="w-64 bg-gray-900 text-white flex-col hidden lg:flex">
-            <div className="p-6 flex items-center gap-3 border-b border-gray-700/50">
-                 <div className="bg-green-500 p-2 rounded-lg">
-                    <BarChart2 className="w-6 h-6 text-white" />
-                </div>
-                <h1 className="text-xl font-bold tracking-wider">Donezo</h1>
+        <aside className="w-64 bg-white text-gray-800 flex-col hidden lg:flex border-r border-gray-200">
+            <div className="p-6 flex items-center justify-center border-b border-gray-200" style={{height: '81px'}}>
+                 <img src={logo} alt="Per Cent Logo" className="h-14 w-auto" />
             </div>
             
-            <nav className="flex-1 p-4 space-y-8">
+            <nav className="flex-1 p-4 space-y-8 mt-4">
                 <div>
-                    <h3 className="px-4 pb-2 text-xs uppercase text-gray-400 tracking-wider">Menu</h3>
+                    <h3 className="px-4 pb-2 text-xs uppercase text-gray-500 tracking-wider">Menu</h3>
                     <ul>
                         {menuItems.map(item => (
                             <li key={item.name}>
                                 <a
                                     href="#"
-                                    onClick={() => setActive(item.name)}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        setCurrentPage(item.name);
+                                    }}
                                     className={`flex items-center px-4 py-3 my-1 rounded-lg transition-colors duration-200 ${
-                                        active === item.name
-                                            ? 'bg-green-600 text-white font-semibold'
-                                            : 'text-gray-300 hover:bg-gray-800 hover:text-white'
+                                        currentPage === item.name
+                                            ? 'bg-green-100 text-green-700 font-semibold'
+                                            : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
                                     }`}
                                 >
                                     <item.icon className="w-5 h-5 mr-3" />
@@ -47,18 +46,14 @@ const Sidebar = () => {
                     </ul>
                 </div>
                 <div>
-                    <h3 className="px-4 pb-2 text-xs uppercase text-gray-400 tracking-wider">General</h3>
+                    <h3 className="px-4 pb-2 text-xs uppercase text-gray-500 tracking-wider">General</h3>
                     <ul>
                         {generalItems.map(item => (
                             <li key={item.name}>
                                 <a
                                     href="#"
-                                    onClick={() => setActive(item.name)}
-                                    className={`flex items-center px-4 py-3 my-1 rounded-lg transition-colors duration-200 ${
-                                        active === item.name
-                                            ? 'bg-green-600 text-white font-semibold'
-                                            : 'text-gray-300 hover:bg-gray-800 hover:text-white'
-                                    }`}
+                                    onClick={(e) => e.preventDefault()}
+                                    className="flex items-center px-4 py-3 my-1 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-gray-900"
                                 >
                                     <item.icon className="w-5 h-5 mr-3" />
                                     {item.name}
@@ -68,16 +63,6 @@ const Sidebar = () => {
                     </ul>
                 </div>
             </nav>
-
-            <div className="p-6">
-                <div className="bg-gray-800 rounded-lg p-4 text-center">
-                    <Download className="mx-auto w-8 h-8 text-green-500" />
-                    <h4 className="font-semibold text-white mt-2">Download our Mobile App</h4>
-                    <button className="mt-4 w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors duration-200">
-                        Download
-                    </button>
-                </div>
-            </div>
         </aside>
     );
 };

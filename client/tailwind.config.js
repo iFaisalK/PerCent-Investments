@@ -5,7 +5,13 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      // Define separate fonts for headings and body text
+      fontFamily: {
+        sans: ['Poppins', 'sans-serif'], // Font for body text
+        heading: ['Montserrat', 'sans-serif'], // Font for headings
+      },
+    },
   },
   plugins: [],
 }
